@@ -1,14 +1,15 @@
-import React from 'react';
-import { Container, Content } from './components/Layout';
+import React from 'react'
+import { Container, Content } from './components/Layout'
+import Search from './components/Search'
 
 function App() {
   return (
     <Container>
       <Content>
-        test app.js
+        <Search />
       </Content>
     </Container>
-  );
+  )
 }
 
-export default App;
+export default App
