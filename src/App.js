@@ -1,6 +1,6 @@
-import React from 'react';
-import { Container, Content } from './components/Layout';
-import Search from './components/Search';
+import React from 'react'
+import { Container, Content } from './components/Layout'
+import Search from './components/Search'
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
         <Search />
       </Content>
     </Container>
-  );
+  )
 }
 
-export default App;
+export default App
