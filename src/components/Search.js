@@ -1,10 +1,9 @@
 /** @jsx jsx */
-import { useState } from 'react';
-import { css, jsx } from '@emotion/core';
+import { useState } from 'react'
+import { css, jsx } from '@emotion/core'
 
 const Search = () => {
-  const [location, setLocation] = useState('');
-
+  const [location, setLocation] = useState('')
   return (
     <div>
       <form action="">
@@ -22,7 +21,7 @@ const Search = () => {
             id="city-search"
             value={location}
             placeholder="Location"
-            onChange={ e => setLocation(e.target.value)}
+            onChange={e => setLocation(e.target.value)}
             css={css`
               margin-top: 1rem;
               padding: 0.5rem;
@@ -35,7 +34,7 @@ const Search = () => {
         </label>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Search;
+export default Search
