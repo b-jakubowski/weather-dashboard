@@ -24,11 +24,7 @@ const WeatherContainer = () => {
     fetchData()
   }, [])
 
-  return (
-    <>
-      {error ? <h4>Something went wrong</h4> : <h4>{weather.name}</h4>}
-    </>
-  )
+  return <>{error ? <h4>Something went wrong</h4> : <h4>{weather.name}</h4>}</>
 }
 
 export default WeatherContainer
