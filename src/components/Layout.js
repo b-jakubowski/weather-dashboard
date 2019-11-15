@@ -11,5 +11,5 @@ export const Container = styled.div`
 export const Content = styled.div`
   width: 34rem;
   background-color: white;
-  padding: 1rem;
+  padding: 2rem;
 `

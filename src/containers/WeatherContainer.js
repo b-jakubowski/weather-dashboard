@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import City from '../components/City';
 
 const WeatherContainer = () => {
   const [error, setErrors] = useState(false)
@@ -11,9 +12,7 @@ const WeatherContainer = () => {
 
     res
       .json()
-      .then(res => {
-        return setWeather(res)
-      })
+      .then(res => setWeather(res))
       .catch(err => {
         console.log(err)
         setErrors(err)
@@ -24,7 +23,18 @@ const WeatherContainer = () => {
     fetchData()
   }, [])
 
-  return <>{error ? <h4>Something went wrong</h4> : <h4>{weather.name}</h4>}</>
+  return (
+    <>
+      {
+        error ?
+          <h4>Something went wrong</h4> :
+          <City
+            name={weather.name}
+            coord={weather.coord}
+          />
+      }
+    </>
+  )
 }
 
 export default WeatherContainer
