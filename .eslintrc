@@ -1,7 +1,6 @@
 {
   "extends": [
     "react-app",
-    "airbnb",
     "plugin:jsx-a11y/recommended",
     "prettier",
     "prettier/react"
@@ -13,7 +12,12 @@
   ],
   "rules": {
     "semi": 0,
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+    "no-undef": "off",
+    "no-unused-vars": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {"devDependencies": true}
+    ],
     "quotes": ["error", "single"],
     "react-hooks/rules-of-hooks": "error",
     "no-console": "warn",
