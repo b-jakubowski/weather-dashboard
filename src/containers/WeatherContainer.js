@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const WeatherContainer = () => {
   const [error, setErrors] = useState(false)
   const [weather, setWeather] = useState('')
 
-  function fetchData() {
-    const res = fetch(
-      'https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=1'
-      // `http://api.openweathermap.org/data/2.5/weather?q=Szczecin&APPID=${process.env.REACT_APP_OPEN_WEATHER_KEY}`
+  async function fetchData() {
+    const res = await fetch(
+      `http://api.openweathermap.org/data/2.5/weather?q=Szczecin&APPID=${process.env.REACT_APP_OPEN_WEATHER_KEY}&units=metric`
     )
 
     res
+      .json()
       .then(res => {
-        return setWeather(res.json())
+        return setWeather(res)
       })
       .catch(err => {
         console.log(err)
@@ -26,7 +26,7 @@ const WeatherContainer = () => {
 
   return (
     <>
-      {error ? <h3>Something went wrong</h3> : <h3>{weather.name}</h3>}
+      {error ? <h4>Something went wrong</h4> : <h4>{weather.name}</h4>}
     </>
   )
 }
