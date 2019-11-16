@@ -1,8 +1,8 @@
 /** @jsx jsx */
-import styled from '@emotion/styled';
-import { css,jsx } from '@emotion/core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowDown, faTint } from '@fortawesome/free-solid-svg-icons';
+import styled from '@emotion/styled'
+import { css, jsx } from '@emotion/core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowDown, faTint } from '@fortawesome/free-solid-svg-icons'
 
 const Weather = props => {
   const { temp, humidity, pressure } = props
@@ -20,18 +20,20 @@ const Weather = props => {
   `
 
   return (
-    <div css={css`
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    `}>
-      <Temperature>
-        {temp}°C
-      </Temperature>
-      <div css={css`
+    <div
+      css={css`
         display: flex;
-        flex-direction: column;
-      `}>
+        align-items: center;
+        justify-content: center;
+      `}
+    >
+      <Temperature>{temp}°C</Temperature>
+      <div
+        css={css`
+          display: flex;
+          flex-direction: column;
+        `}
+      >
         <WeatherDetails>
           <FontAwesomeIcon
             icon={faTint}

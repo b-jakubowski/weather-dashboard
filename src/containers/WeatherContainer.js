@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import City from '../components/City'
-import Weather from '../components/Weather';
+import Weather from '../components/Weather'
 
 const WeatherContainer = () => {
   const [weather, setWeather] = useState('')
@@ -16,8 +16,7 @@ const WeatherContainer = () => {
       .then(res => {
         setWeather(res)
         setIsLoading(false)
-      }
-      )
+      })
       .catch(err => {
         console.error(err)
       })
@@ -33,14 +32,14 @@ const WeatherContainer = () => {
         <h4>Loading...</h4>
       ) : (
         <>
-          <City name={weather.name} coord={weather.coord}/>
-          {weather.main &&
+          <City name={weather.name} coord={weather.coord} />
+          {weather.main && (
             <Weather
               temp={weather.main.temp}
               humidity={weather.main.humidity}
               pressure={weather.main.pressure}
             />
-          }
+          )}
         </>
       )}
     </>
