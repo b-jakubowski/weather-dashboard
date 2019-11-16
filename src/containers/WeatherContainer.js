@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import City from '../components/City';
+import City from '../components/City'
 
 const WeatherContainer = () => {
   const [error, setErrors] = useState(false)
@@ -25,14 +25,11 @@ const WeatherContainer = () => {
 
   return (
     <>
-      {
-        error ?
-          <h4>Something went wrong</h4> :
-          <City
-            name={weather.name}
-            coord={weather.coord}
-          />
-      }
+      {error ? (
+        <h4>Something went wrong</h4>
+      ) : (
+        <City name={weather.name} coord={weather.coord} />
+      )}
     </>
   )
 }

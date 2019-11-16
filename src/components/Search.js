@@ -11,20 +11,19 @@ const Search = () => {
           htmlFor="city"
           css={css`
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
           `}
         >
-          Search for location
           <input
             type="text"
             id="city-search"
             value={location}
-            placeholder="Location"
+            placeholder="Search for City"
             onChange={e => setLocation(e.target.value)}
             css={css`
-              margin-top: 1rem;
-              padding: 0.5rem;
+              padding: 0.5rem 0;
+              margin-left: 1rem;
               width: 12rem;
               border-style: solid;
               border-width: 0 0 1.5px 0;

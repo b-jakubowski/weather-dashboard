@@ -1,9 +1,9 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core'
-import styled from '@emotion/styled';
+import styled from '@emotion/styled'
 
-const City = (props) => {
-  const { name, coord } = props;
+const City = props => {
+  const { name, coord } = props
   const todayDate = new Date().toDateString()
 
   const CityName = styled.h3`
@@ -16,31 +16,35 @@ const City = (props) => {
     font-size: 0.8rem;
     margin: 0 0.5rem 0.3rem 0;
   `
-  const DateTxt = styled.p`
-    color: grey;
-    margin: 0;
-  `
 
   return (
-    <div>
+    <div
+      css={css`
+        margin-top: 0.5rem;
+      `}
+    >
       <div
         css={css`
           display: flex;
-          align-items: flex-end;
+          flex-direction: column;
+          align-items: center;
           margin: 0.5rem 0;
-      `}>
+        `}
+      >
         <CityName>{name}</CityName>
-        {coord &&
-          <div css={css`
-            display: flex;
-            margin-left: 0.6rem
-          `}>
+        {coord && (
+          <div
+            css={css`
+              display: flex;
+              margin-left: 0.6rem;
+            `}
+          >
             <Coord>lng: {coord.lon}</Coord>
             <Coord>lat: {coord.lat}</Coord>
+            <Coord>{todayDate}</Coord>
           </div>
-        }
+        )}
       </div>
-      <DateTxt>{todayDate}</DateTxt>
     </div>
   )
 }
