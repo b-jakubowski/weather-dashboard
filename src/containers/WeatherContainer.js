@@ -8,7 +8,7 @@ const WeatherContainer = () => {
 
   async function fetchData() {
     const res = await fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=Szczecin&APPID=${process.env.REACT_APP_OPEN_WEATHER_KEY}&units=metric`
+      `http://api.openweathermap.org/data/2.5/weather?q=Szczecin&units=metric&APPID=${process.env.REACT_APP_OPEN_WEATHER_KEY}`
     )
     setIsLoading(true)
     res
@@ -38,6 +38,7 @@ const WeatherContainer = () => {
               temp={weather.main.temp}
               humidity={weather.main.humidity}
               pressure={weather.main.pressure}
+              sun={weather.sys}
             />
           )}
         </>
