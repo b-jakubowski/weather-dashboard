@@ -3,7 +3,12 @@ import dayjs from 'dayjs'
 import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowDown, faMoon, faSun, faTint } from '@fortawesome/free-solid-svg-icons'
+import {
+  faArrowDown,
+  faMoon,
+  faSun,
+  faTint
+} from '@fortawesome/free-solid-svg-icons'
 
 const Weather = props => {
   const { temp, humidity, pressure, sun } = props
@@ -29,9 +34,7 @@ const Weather = props => {
           justify-content: center;
         `}
       >
-        <Temperature>
-          {Math.round(temp * 10) / 10}°C
-        </Temperature>
+        <Temperature>{Math.round(temp * 10) / 10}°C</Temperature>
         <div
           css={css`
             display: flex;
@@ -68,19 +71,19 @@ const Weather = props => {
           <FontAwesomeIcon
             icon={faSun}
             css={css`
-                margin-right: 0.5rem;
-              `}
+              margin-right: 0.5rem;
+            `}
           />
-          Sunrise: {dayjs.unix(sun.sunrise).format("HH:mm")}
+          Sunrise: {dayjs.unix(sun.sunrise).format('HH:mm')}
         </WeatherDetails>
         <WeatherDetails>
           <FontAwesomeIcon
             icon={faMoon}
             css={css`
-                margin-right: 0.5rem;
-              `}
+              margin-right: 0.5rem;
+            `}
           />
-          Sunset: {dayjs.unix(sun.sunset).format("HH:mm")}
+          Sunset: {dayjs.unix(sun.sunset).format('HH:mm')}
         </WeatherDetails>
       </div>
     </div>
