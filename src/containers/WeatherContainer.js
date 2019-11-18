@@ -8,7 +8,7 @@ const WeatherContainer = () => {
 
   async function fetchData() {
     const res = await fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=Szczecin&units=metric&APPID=${process.env.REACT_APP_OPEN_WEATHER_KEY}`
+      `https://api.openweathermap.org/data/2.5/weather?q=Szczecin&units=metric&APPID=${process.env.REACT_APP_OPEN_WEATHER_KEY}`
     )
     setIsLoading(true)
     res
