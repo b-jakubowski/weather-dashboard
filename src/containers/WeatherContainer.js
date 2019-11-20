@@ -1,6 +1,4 @@
-/** @jsx jsx */
 import React, { useEffect, useState } from 'react'
-import { css, jsx } from '@emotion/core'
 import City from '../components/City'
 import Weather from '../components/Weather'
 
@@ -8,6 +6,13 @@ const WeatherContainer = () => {
   const [weather, setWeather] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [city, setCity] = useState('Szczecin')
+
+  function onEnterClick(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      fetchWeather()
+    }
+  }
 
   async function fetchWeather() {
     const res = await fetch(
@@ -25,28 +30,15 @@ const WeatherContainer = () => {
       })
   }
 
-  function onEnterClick(e) {
-    if (e.key === 'Enter') {
-      e.preventDefault()
-      fetchWeather()
-    }
-  }
-
   useEffect(() => {
     fetchWeather()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
     <>
       <form>
-        <label
-          htmlFor="city"
-          css={css`
-            display: flex;
-            justify-content: center;
-            margin-bottom: 1rem;
-          `}
-        >
+        <label htmlFor="city" style={styles.label}>
           <input
             type="text"
             id="city-search"
@@ -54,14 +46,7 @@ const WeatherContainer = () => {
             placeholder="Search for City"
             onChange={e => setCity(e.target.value)}
             onKeyDown={e => onEnterClick(e)}
-            css={css`
-              padding: 0.5rem;
-              margin-left: 1rem;
-              width: 12rem;
-              border-style: solid;
-              border-width: 0 0 1.5px 0;
-              border-color: grey;
-            `}
+            style={styles.searchInput}
           />
         </label>
       </form>
@@ -82,6 +67,22 @@ const WeatherContainer = () => {
       )}
     </>
   )
+}
+
+const styles = {
+  label: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginBottom: '1rem'
+  },
+  searchInput: {
+    padding: '0.5rem',
+    marginLeft: '1rem',
+    width: '12rem',
+    borderStyle: 'solid',
+    borderWidth: '0 0 1.5px 0',
+    borderColor: 'grey'
+  }
 }
 
 export default WeatherContainer
