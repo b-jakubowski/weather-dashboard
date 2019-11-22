@@ -26,13 +26,12 @@ const WeatherContainer = () => {
         setIsLoading(false)
       })
       .catch(err => {
-        console.error(err)
+        throw err
       })
   }
 
   useEffect(() => {
     fetchWeather()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

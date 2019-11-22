@@ -1,7 +1,6 @@
-/** @jsx jsx */
+import React from 'react'
 import dayjs from 'dayjs'
 import styled from '@emotion/styled'
-import { css, jsx } from '@emotion/core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faArrowDown,
@@ -12,6 +11,12 @@ import {
 
 const Weather = props => {
   const { temp, humidity, pressure, sun } = props
+
+  const Container = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `
 
   const Temperature = styled.h3`
     font-size: 4rem;
@@ -25,67 +30,45 @@ const Weather = props => {
     padding: 0.2rem;
   `
 
+  const SunriseSunset = styled.div`
+    display: flex;
+    justify-content: center;
+  `
+
+  const Icon = styled(FontAwesomeIcon)`
+    margin-right: 0.5rem;
+  `
+
+  const HumidityPressure = styled.div`
+    display: flex;
+    flex-direction: column;
+  `
+
   return (
     <div>
-      <div
-        css={css`
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        `}
-      >
+      <Container>
         <Temperature>{Math.round(temp * 10) / 10}°C</Temperature>
-        <div
-          css={css`
-            display: flex;
-            flex-direction: column;
-          `}
-        >
+        <HumidityPressure>
           <WeatherDetails>
-            <FontAwesomeIcon
-              icon={faTint}
-              css={css`
-                margin-right: 0.5rem;
-              `}
-            />
+            <Icon icon={faTint} />
             Humidity: {humidity} %
           </WeatherDetails>
           <WeatherDetails>
-            <FontAwesomeIcon
-              icon={faArrowDown}
-              css={css`
-                margin-right: 0.5rem;
-              `}
-            />
+            <Icon icon={faArrowDown} />
             Pressure: {pressure} hPa
           </WeatherDetails>
-        </div>
-      </div>
-      <div
-        css={css`
-          display: flex;
-          justify-content: center;
-        `}
-      >
+        </HumidityPressure>
+      </Container>
+      <SunriseSunset>
         <WeatherDetails>
-          <FontAwesomeIcon
-            icon={faSun}
-            css={css`
-              margin-right: 0.5rem;
-            `}
-          />
+          <Icon icon={faSun} />
           Sunrise: {dayjs.unix(sun.sunrise).format('HH:mm')}
         </WeatherDetails>
         <WeatherDetails>
-          <FontAwesomeIcon
-            icon={faMoon}
-            css={css`
-              margin-right: 0.5rem;
-            `}
-          />
+          <Icon icon={faMoon} />
           Sunset: {dayjs.unix(sun.sunset).format('HH:mm')}
         </WeatherDetails>
-      </div>
+      </SunriseSunset>
     </div>
   )
 }
