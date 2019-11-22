@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import City from '../components/City'
 import Weather from '../components/Weather'
+import Search from '../components/Search'
 
 const WeatherContainer = () => {
   const [weather, setWeather] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const [city, setCity] = useState('Szczecin')
 
   function onEnterClick(e) {
     if (e.key === 'Enter') {
       e.preventDefault()
-      fetchWeather()
+      fetchWeather(e.target.value)
     }
   }
 
-  async function fetchWeather() {
+  async function fetchWeather(value = 'Szczecin') {
     const res = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=${process.env.REACT_APP_OPEN_WEATHER_KEY}`
+      `https://api.openweathermap.org/data/2.5/weather?q=${value}&units=metric&APPID=${process.env.REACT_APP_OPEN_WEATHER_KEY}`
     )
     setIsLoading(true)
     res
@@ -37,19 +37,7 @@ const WeatherContainer = () => {
 
   return (
     <>
-      <form>
-        <label htmlFor="city" style={styles.label}>
-          <input
-            type="text"
-            id="city-search"
-            value={city}
-            placeholder="Search for City"
-            onChange={e => setCity(e.target.value)}
-            onKeyDown={e => onEnterClick(e)}
-            style={styles.searchInput}
-          />
-        </label>
-      </form>
+      <Search onKeyDown={e => onEnterClick(e)} />
       {isLoading ? (
         <h4>Loading...</h4>
       ) : (
@@ -67,22 +55,6 @@ const WeatherContainer = () => {
       )}
     </>
   )
-}
-
-const styles = {
-  label: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginBottom: '1rem'
-  },
-  searchInput: {
-    padding: '0.5rem',
-    marginLeft: '1rem',
-    width: '12rem',
-    borderStyle: 'solid',
-    borderWidth: '0 0 1.5px 0',
-    borderColor: 'grey'
-  }
 }
 
 export default WeatherContainer
