@@ -37,6 +37,7 @@
   "devDependencies": {
     "@emotion/core": "^10.0.22",
     "@emotion/styled": "^10.0.23",
+    "chart.js": "^2.9.3",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
