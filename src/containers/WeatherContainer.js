@@ -1,55 +1,95 @@
 import React, { useEffect, useState } from 'react'
 import City from '../components/City'
 import Weather from '../components/Weather'
+import Search from '../components/Search'
+import Forecast from '../components/Forecast'
 
 const WeatherContainer = () => {
   const [weather, setWeather] = useState('')
+  const [forecast, setForecast] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const [city, setCity] = useState('Szczecin')
 
   function onEnterClick(e) {
     if (e.key === 'Enter') {
       e.preventDefault()
-      fetchWeather()
+      fetchWeather(e.target.value)
     }
   }
 
-  async function fetchWeather() {
+  async function fetchWeather(value = 'Szczecin') {
     const res = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=${process.env.REACT_APP_OPEN_WEATHER_KEY}`
+      `https://api.openweathermap.org/data/2.5/weather?q=${value}&units=metric&APPID=${process.env.REACT_APP_OPEN_WEATHER_KEY}`
     )
     setIsLoading(true)
     res
       .json()
       .then(res => {
         setWeather(res)
+      })
+      .then(() => {
+        fetchForecast(value)
         setIsLoading(false)
       })
       .catch(err => {
-        console.error(err)
+        throw err
       })
+  }
+
+  async function fetchForecast(value = 'Szczecin') {
+    const res = await fetch(
+      `https://api.openweathermap.org/data/2.5/forecast?q=${value}&units=metric&APPID=${process.env.REACT_APP_OPEN_WEATHER_KEY}`
+    )
+    res
+      .json()
+      .then(res => {
+        setForecast(mapForecast(res))
+      })
+      .catch(err => {
+        throw err
+      })
+  }
+
+  function mapForecast(weatherData) {
+    const tempByDay = {}
+    const matchDate = /^\d{4}-\d*-\d*/g
+
+    weatherData.list.forEach(forecast => {
+      const today = new Date().toString().split(' ')[0]
+      const dateKey = new Date(forecast.dt_txt.match(matchDate))
+        .toString()
+        .split(' ')[0]
+
+      switch (true) {
+        case dateKey === today:
+          break
+        case dateKey in tempByDay:
+          tempByDay[dateKey].push(forecast.main.temp)
+          break
+        default:
+          tempByDay[dateKey] = [forecast.main.temp]
+          break
+      }
+    })
+
+    return getHighestTemp(tempByDay)
+  }
+
+  function getHighestTemp(obj) {
+    Object.keys(obj).forEach(day => {
+      obj[day] = Math.max(...obj[day])
+    })
+
+    return obj
   }
 
   useEffect(() => {
     fetchWeather()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
   }, [])
 
   return (
     <>
-      <form>
-        <label htmlFor="city" style={styles.label}>
-          <input
-            type="text"
-            id="city-search"
-            value={city}
-            placeholder="Search for City"
-            onChange={e => setCity(e.target.value)}
-            onKeyDown={e => onEnterClick(e)}
-            style={styles.searchInput}
-          />
-        </label>
-      </form>
+      <Search onKeyDown={e => onEnterClick(e)} />
       {isLoading ? (
         <h4>Loading...</h4>
       ) : (
@@ -63,26 +103,11 @@ const WeatherContainer = () => {
               sun={weather.sys}
             />
           )}
+          {forecast && <Forecast forecast={forecast} />}
         </>
       )}
     </>
   )
-}
-
-const styles = {
-  label: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginBottom: '1rem'
-  },
-  searchInput: {
-    padding: '0.5rem',
-    marginLeft: '1rem',
-    width: '12rem',
-    borderStyle: 'solid',
-    borderWidth: '0 0 1.5px 0',
-    borderColor: 'grey'
-  }
 }
 
 export default WeatherContainer
