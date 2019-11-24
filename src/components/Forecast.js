@@ -11,15 +11,31 @@ const Forecast = ({ forecast }) => {
         legend: {
           display: false
         },
-        yAxes: [
-          {
-            display: true,
-            ticks: {
-              suggestedMin: 0,
-              suggestedMax: 50
+        responsive: true,
+        scales: {
+          yAxes: [
+            {
+              display: true,
+              ticks: {
+                suggestedMin: 0,
+                fontColor: 'white'
+              },
+              gridLines: {
+                display: false
+              }
             }
-          }
-        ]
+          ],
+          xAxes: [
+            {
+              ticks: {
+                fontColor: 'white'
+              },
+              gridLines: {
+                display: false
+              }
+            }
+          ]
+        }
       },
       data: {
         labels: Object.keys(forecast),
@@ -27,7 +43,7 @@ const Forecast = ({ forecast }) => {
           {
             label: '',
             data: Object.values(forecast),
-            backgroundColor: ['rgba(100, 100, 100, 0.7)']
+            backgroundColor: 'rgba(255,255,255, 0.9)'
           }
         ]
       }
@@ -40,10 +56,8 @@ const Forecast = ({ forecast }) => {
   }, []);
 
 
-
   return (
     <div style={styles.container}>
-      <h4 style={styles.title}>5 day forecast</h4>
       <canvas style={styles.canvas} ref={node => (chartCanvas = node)} />
     </div>
   )
@@ -51,14 +65,11 @@ const Forecast = ({ forecast }) => {
 
 const styles = {
   container: {
-    marginTop: '1rem'
+    marginTop: '3rem',
+    maxHeight: '100%'
   },
   canvas: {
-    width: 800,
-    height: 400
-  },
-  title: {
-    textAlign: 'center'
+    maxWidth: '100%'
   }
 }
 

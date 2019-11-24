@@ -23,11 +23,19 @@ const Weather = props => {
     padding: 0.5rem;
     font-weight: normal;
     margin: 0.5rem 1rem;
+    color: rgba(255, 255, 255, 0.9);
+  `
+
+  const HumidityPressure = styled.div`
+    display: flex;
+    flex-direction: column;
+    color: rgba(255, 255, 255, 0.9);
   `
 
   const WeatherDetails = styled.p`
     margin: 0 0.5rem 0 0;
     padding: 0.2rem;
+    color: rgba(255, 255, 255, 0.9);
   `
 
   const SunriseSunset = styled.div`
@@ -37,11 +45,6 @@ const Weather = props => {
 
   const Icon = styled(FontAwesomeIcon)`
     margin-right: 0.5rem;
-  `
-
-  const HumidityPressure = styled.div`
-    display: flex;
-    flex-direction: column;
   `
 
   return (
@@ -61,7 +64,7 @@ const Weather = props => {
       </Container>
       <SunriseSunset>
         <WeatherDetails>
-          <Icon icon={faSun} />
+          <Icon icon={faSun} style={{ color: 'rgba(254,95,0, 0.8)' }} />
           Sunrise: {dayjs.unix(sun.sunrise).format('HH:mm')}
         </WeatherDetails>
         <WeatherDetails>
