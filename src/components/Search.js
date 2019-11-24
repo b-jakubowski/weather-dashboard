@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 const Search = ({ onKeyDown }) => {
   const [city, setCity] = useState('Szczecin')
@@ -15,6 +17,7 @@ const Search = ({ onKeyDown }) => {
           onKeyDown={onKeyDown}
           style={styles.searchInput}
         />
+        <FontAwesomeIcon style={styles.icon} icon={faSearch} />
       </label>
     </form>
   )
@@ -24,6 +27,7 @@ const styles = {
   label: {
     display: 'flex',
     justifyContent: 'center',
+    alignItems: 'center',
     marginBottom: '1rem'
   },
   searchInput: {
@@ -33,6 +37,10 @@ const styles = {
     borderStyle: 'solid',
     borderWidth: '0 0 1.5px 0',
     borderColor: 'grey'
+  },
+  icon: {
+    marginLeft: '-2rem',
+    color: 'lightgrey'
   }
 }
 

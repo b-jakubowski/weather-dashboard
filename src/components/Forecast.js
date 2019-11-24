@@ -17,7 +17,8 @@ const Forecast = ({ forecast }) => {
             {
               display: true,
               ticks: {
-                suggestedMin: 0
+                suggestedMin: 0,
+                fontColor: 'white'
               },
               gridLines: {
                 display: false
@@ -26,6 +27,9 @@ const Forecast = ({ forecast }) => {
           ],
           xAxes: [
             {
+              ticks: {
+                fontColor: 'white'
+              },
               gridLines: {
                 display: false
               }
@@ -39,7 +43,7 @@ const Forecast = ({ forecast }) => {
           {
             label: '',
             data: Object.values(forecast),
-            backgroundColor: 'rgba(100, 100, 100, 0.5)'
+            backgroundColor: 'rgba(255,255,255, 0.9)'
           }
         ]
       }
