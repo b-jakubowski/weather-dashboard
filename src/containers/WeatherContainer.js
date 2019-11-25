@@ -5,19 +5,53 @@ import Weather from '../components/Weather'
 import Search from '../components/Search'
 import Forecast from '../components/Forecast'
 
+const Container = styled.div`
+  background-image: radial-gradient(
+    circle farthest-corner at 84.6% 77.8%,
+    rgba(86, 89, 218, 1) 0%,
+    rgba(95, 208, 248, 1) 90%
+  );
+  border-radius: 1rem;
+  padding: 2rem;
+`
+
+function mapForecast(weatherData) {
+  const tempByDay = {}
+  const matchDate = /^\d{4}-\d*-\d*/g
+
+  weatherData.list.forEach(forecast => {
+    const today = new Date().toString().split(' ')[0]
+    const dateKey = new Date(forecast.dt_txt.match(matchDate))
+      .toString()
+      .split(' ')[0]
+
+    switch (true) {
+      case dateKey === today:
+        break
+      case dateKey in tempByDay:
+        tempByDay[dateKey].push(forecast.main.temp)
+        break
+      default:
+        tempByDay[dateKey] = [forecast.main.temp]
+        break
+    }
+  })
+
+  return getHighestTemp(tempByDay)
+}
+
+function getHighestTemp(obj) {
+  Object.keys(obj).forEach(day => {
+    obj[day] = Math.max(...obj[day])
+  })
+
+  return obj
+}
+
 const WeatherContainer = () => {
   const [weather, setWeather] = useState('')
   const [forecast, setForecast] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const Container = styled.div`
-    background-image: radial-gradient(
-      circle farthest-corner at 84.6% 77.8%,
-      rgba(86, 89, 218, 1) 0%,
-      rgba(95, 208, 248, 1) 90%
-    );
-    border-radius: 1rem;
-    padding: 2rem;
-  `
 
   function onEnterClick(e) {
     if (e.key === 'Enter') {
@@ -57,39 +91,6 @@ const WeatherContainer = () => {
       .catch(err => {
         throw err
       })
-  }
-
-  function mapForecast(weatherData) {
-    const tempByDay = {}
-    const matchDate = /^\d{4}-\d*-\d*/g
-
-    weatherData.list.forEach(forecast => {
-      const today = new Date().toString().split(' ')[0]
-      const dateKey = new Date(forecast.dt_txt.match(matchDate))
-        .toString()
-        .split(' ')[0]
-
-      switch (true) {
-        case dateKey === today:
-          break
-        case dateKey in tempByDay:
-          tempByDay[dateKey].push(forecast.main.temp)
-          break
-        default:
-          tempByDay[dateKey] = [forecast.main.temp]
-          break
-      }
-    })
-
-    return getHighestTemp(tempByDay)
-  }
-
-  function getHighestTemp(obj) {
-    Object.keys(obj).forEach(day => {
-      obj[day] = Math.max(...obj[day])
-    })
-
-    return obj
   }
 
   useEffect(() => {
