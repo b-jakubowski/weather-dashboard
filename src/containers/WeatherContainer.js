@@ -17,6 +17,7 @@ const Container = styled.div`
 
 function mapForecast(weatherData) {
   const tempByDay = {}
+  const minTempByDay = {}
   const matchDate = /^\d{4}-\d*-\d*/g
 
   weatherData.list.forEach(forecast => {
@@ -30,19 +31,21 @@ function mapForecast(weatherData) {
         break
       case dateKey in tempByDay:
         tempByDay[dateKey].push(forecast.main.temp)
+        minTempByDay[dateKey].push(forecast.main.temp_min)
         break
       default:
         tempByDay[dateKey] = [forecast.main.temp]
+        minTempByDay[dateKey] = [forecast.main.temp_min]
         break
     }
   })
 
-  return getHighestTemp(tempByDay)
+  return { temp: getExtremeTemp(tempByDay, 'max'), minTemp: getExtremeTemp(minTempByDay, 'min') }
 }
 
-function getHighestTemp(obj) {
+function getExtremeTemp(obj, extreme) {
   Object.keys(obj).forEach(day => {
-    obj[day] = Math.max(...obj[day])
+    obj[day] = Math[extreme](...obj[day])
   })
 
   return obj

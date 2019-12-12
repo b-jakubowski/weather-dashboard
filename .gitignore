@@ -129,3 +129,4 @@ modules.xml
 .idea/sonarlint
 
 # End of https://www.gitignore.io/api/react,webstorm+all
+/.env
