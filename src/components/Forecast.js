@@ -35,7 +35,7 @@ const Forecast = ({ forecast }) => {
                 display: false
               }
             }
-          ],
+          ]
         }
       },
       data: {

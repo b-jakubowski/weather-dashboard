@@ -40,7 +40,10 @@ function mapForecast(weatherData) {
     }
   })
 
-  return { temp: getExtremeTemp(tempByDay, 'max'), minTemp: getExtremeTemp(minTempByDay, 'min') }
+  return {
+    temp: getExtremeTemp(tempByDay, 'max'),
+    minTemp: getExtremeTemp(minTempByDay, 'min')
+  }
 }
 
 function getExtremeTemp(obj, extreme) {
