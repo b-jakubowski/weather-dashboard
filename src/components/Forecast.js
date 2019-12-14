@@ -27,6 +27,7 @@ const Forecast = ({ forecast }) => {
           ],
           xAxes: [
             {
+              stacked: true,
               ticks: {
                 fontColor: 'white'
               },
@@ -38,11 +39,16 @@ const Forecast = ({ forecast }) => {
         }
       },
       data: {
-        labels: Object.keys(forecast),
+        labels: Object.keys(forecast.temp),
         datasets: [
           {
             label: '',
-            data: Object.values(forecast),
+            data: Object.values(forecast.minTemp),
+            backgroundColor: 'blue'
+          },
+          {
+            label: '',
+            data: Object.values(forecast.temp),
             backgroundColor: 'rgba(255,255,255, 0.9)'
           }
         ]
