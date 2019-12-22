@@ -59,7 +59,7 @@ const Forecast = ({ forecast }) => {
   useEffect(() => {
     setChart()
     // eslint-disable-next-line
-  }, []);
+  }, [forecast]);
 
 
   return (
