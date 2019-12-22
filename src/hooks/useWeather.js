@@ -5,25 +5,27 @@ function mapForecast(weatherData) {
   const minTempByDay = {}
   const matchDate = /^\d{4}-\d*-\d*/g
 
-  weatherData.list.forEach(forecast => {
-    const today = new Date().toString().split(' ')[0]
-    const dateKey = new Date(forecast.dt_txt.match(matchDate))
-      .toString()
-      .split(' ')[0]
+  if (weatherData.city) {
+    weatherData.list.forEach(forecast => {
+      const today = new Date().toString().split(' ')[0]
+      const dateKey = new Date(forecast.dt_txt.match(matchDate))
+        .toString()
+        .split(' ')[0]
 
-    switch (true) {
-      case dateKey === today:
-        break
-      case dateKey in tempByDay:
-        tempByDay[dateKey].push(forecast.main.temp)
-        minTempByDay[dateKey].push(forecast.main.temp_min)
-        break
-      default:
-        tempByDay[dateKey] = [forecast.main.temp]
-        minTempByDay[dateKey] = [forecast.main.temp_min]
-        break
-    }
-  })
+      switch (true) {
+        case dateKey === today:
+          break
+        case dateKey in tempByDay:
+          tempByDay[dateKey].push(forecast.main.temp)
+          minTempByDay[dateKey].push(forecast.main.temp_min)
+          break
+        default:
+          tempByDay[dateKey] = [forecast.main.temp]
+          minTempByDay[dateKey] = [forecast.main.temp_min]
+          break
+      }
+    })
+  }
 
   return {
     temp: getExtremeTemp(tempByDay, 'max'),

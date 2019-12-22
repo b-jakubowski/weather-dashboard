@@ -16,6 +16,11 @@ const Container = styled.div`
   padding: 2rem;
 `
 
+const NotFoundText = styled.h4`
+  color: white;
+  text-align: center;
+`
+
 const WeatherContainer = () => {
   const [city, setCity] = useState('Szczecin')
   const { weather, forecast, isLoading } = useWeather(city)
@@ -39,15 +44,19 @@ const WeatherContainer = () => {
       ) : (
         <Container>
           <City name={weather.name} coord={weather.coord} />
-          {weather.main && (
-            <Weather
-              temp={weather.main.temp}
-              humidity={weather.main.humidity}
-              pressure={weather.main.pressure}
-              sun={weather.sys}
-            />
+          {forecast.temp && weather.main ? (
+            <>
+              <Weather
+                temp={weather.main.temp}
+                humidity={weather.main.humidity}
+                pressure={weather.main.pressure}
+                sun={weather.sys}
+              />
+              <Forecast forecast={forecast} />
+            </>
+          ) : (
+            <NotFoundText>Cant find results for '{city}'</NotFoundText>
           )}
-          {forecast && <Forecast forecast={forecast} />}
         </Container>
       )}
     </>
