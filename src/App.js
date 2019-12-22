@@ -6,7 +6,7 @@ export const Container = styled.div`
   display: flex;
   min-height: calc(100vh - 4rem);
   justify-content: center;
-  padding: 2rem;
+  padding: 1rem 2rem;
 `
 
 export const Content = styled.div`

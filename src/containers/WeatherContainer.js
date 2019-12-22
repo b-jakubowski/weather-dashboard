@@ -29,7 +29,11 @@ const WeatherContainer = () => {
 
   return (
     <>
-      <Search onKeyDown={e => onEnterClick(e)} />
+      <Search
+        value={city}
+        onClick={inputValue => setCity(inputValue)}
+        onKeyDown={e => onEnterClick(e)}
+      />
       {isLoading ? (
         <h4>Loading...</h4>
       ) : (

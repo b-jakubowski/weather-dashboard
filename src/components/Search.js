@@ -19,16 +19,23 @@ const SearchInput = styled.input`
   border-color: grey;
 `
 
-const Icon = styled(FontAwesomeIcon)`
-  margin-left: -2rem;
-  color: lightgrey;
+const IconButton = styled.button`
+  margin: 1rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid grey;
+  border-radius: 0.2rem;
 `
 
-const Search = ({ onKeyDown }) => {
-  const [city, setCity] = useState('Szczecin')
+const Search = ({ onKeyDown, onClick, value }) => {
+  const [city, setCity] = useState(value)
+
+  function onSubmit(e) {
+    e.preventDefault()
+    onClick(city)
+  }
 
   return (
-    <form>
+    <form onSubmit={e => onSubmit(e)}>
       <SearchLabel htmlFor="city">
         <SearchInput
           type="text"
@@ -38,7 +45,9 @@ const Search = ({ onKeyDown }) => {
           onChange={e => setCity(e.target.value)}
           onKeyDown={onKeyDown}
         />
-        <Icon icon={faSearch} />
+        <IconButton type="submit">
+          <FontAwesomeIcon icon={faSearch} />
+        </IconButton>
       </SearchLabel>
     </form>
   )
