@@ -44,7 +44,8 @@ function getExtremeTemp(obj, extreme) {
 function useWeather(value) {
   const [weather, setWeather] = useState('')
   const [forecast, setForecast] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+  const [isError, setIsError] = useState(false)
 
   useEffect(() => {
     async function fetchWeather() {
@@ -59,9 +60,9 @@ function useWeather(value) {
         })
         .then(() => {
           fetchForecast(value)
-          setIsLoading(false)
         })
         .catch(err => {
+          setIsError(true)
           throw err
         })
     }
@@ -74,8 +75,10 @@ function useWeather(value) {
         .json()
         .then(res => {
           setForecast(mapForecast(res))
+          setIsLoading(false)
         })
         .catch(err => {
+          setIsError(true)
           throw err
         })
     }
@@ -83,7 +86,7 @@ function useWeather(value) {
     fetchWeather()
   }, [value])
 
-  return { weather, forecast, isLoading }
+  return { weather, forecast, isLoading, isError }
 }
 
 export default useWeather

@@ -16,20 +16,41 @@ const Container = styled.div`
   padding: 2rem;
 `
 
-const NotFoundText = styled.h4`
+const InfoText = styled.h4`
   color: white;
   text-align: center;
 `
 
 const WeatherContainer = () => {
   const [city, setCity] = useState('Szczecin')
-  const { weather, forecast, isLoading } = useWeather(city)
+  const { weather, forecast, isLoading, isError } = useWeather(city)
 
   function onEnterClick(e) {
     if (e.key === 'Enter') {
       e.preventDefault()
       setCity(e.target.value)
     }
+  }
+
+  const WeatherAndForecast = () => {
+    return (
+      <>
+        {!isError && forecast.temp && weather.main ? (
+          <>
+            <City name={weather.name} coord={weather.coord} />
+            <Weather
+              temp={weather.main.temp}
+              humidity={weather.main.humidity}
+              pressure={weather.main.pressure}
+              sun={weather.sys}
+            />
+            <Forecast forecast={forecast} />
+          </>
+        ) : (
+          <InfoText>Cant find results for '{city}'</InfoText>
+        )}
+      </>
+    )
   }
 
   return (
@@ -39,26 +60,9 @@ const WeatherContainer = () => {
         onClick={inputValue => setCity(inputValue)}
         onKeyDown={e => onEnterClick(e)}
       />
-      {isLoading ? (
-        <h4>Loading...</h4>
-      ) : (
-        <Container>
-          <City name={weather.name} coord={weather.coord} />
-          {forecast.temp && weather.main ? (
-            <>
-              <Weather
-                temp={weather.main.temp}
-                humidity={weather.main.humidity}
-                pressure={weather.main.pressure}
-                sun={weather.sys}
-              />
-              <Forecast forecast={forecast} />
-            </>
-          ) : (
-            <NotFoundText>Cant find results for '{city}'</NotFoundText>
-          )}
-        </Container>
-      )}
+      <Container>
+        {isLoading ? <InfoText>Loading....</InfoText> : <WeatherAndForecast />}
+      </Container>
     </>
   )
 }
