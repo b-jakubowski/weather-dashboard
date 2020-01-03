@@ -46,42 +46,41 @@ function useWeather(value) {
   const [forecast, setForecast] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
-  async function fetchWeather() {
-    const res = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${value}&units=metric&APPID=${process.env.REACT_APP_OPEN_WEATHER_KEY}`
-    )
-    setIsLoading(true)
-    res
-      .json()
-      .then(res => {
-        setWeather(res)
-      })
-      .then(() => {
-        fetchForecast(value)
-        setIsLoading(false)
-      })
-      .catch(err => {
-        throw err
-      })
-  }
-
-  async function fetchForecast(value = 'Szczecin') {
-    const res = await fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${value}&units=metric&APPID=${process.env.REACT_APP_OPEN_WEATHER_KEY}`
-    )
-    res
-      .json()
-      .then(res => {
-        setForecast(mapForecast(res))
-      })
-      .catch(err => {
-        throw err
-      })
-  }
-
   useEffect(() => {
+    async function fetchWeather() {
+      const res = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${value}&units=metric&APPID=${process.env.REACT_APP_OPEN_WEATHER_KEY}`
+      )
+      setIsLoading(true)
+      res
+        .json()
+        .then(res => {
+          setWeather(res)
+        })
+        .then(() => {
+          fetchForecast(value)
+          setIsLoading(false)
+        })
+        .catch(err => {
+          throw err
+        })
+    }
+
+    async function fetchForecast(value = 'Szczecin') {
+      const res = await fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?q=${value}&units=metric&APPID=${process.env.REACT_APP_OPEN_WEATHER_KEY}`
+      )
+      res
+        .json()
+        .then(res => {
+          setForecast(mapForecast(res))
+        })
+        .catch(err => {
+          throw err
+        })
+    }
+
     fetchWeather()
-    // eslint-disable-next-line
   }, [value])
 
   return { weather, forecast, isLoading }
