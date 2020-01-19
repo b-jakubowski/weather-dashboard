@@ -1,13 +1,8 @@
 import React from 'react'
-import dayjs from 'dayjs'
 import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faArrowDown,
-  faMoon,
-  faSun,
-  faTint
-} from '@fortawesome/free-solid-svg-icons'
+import { faArrowDown, faTint } from '@fortawesome/free-solid-svg-icons'
+import SunriseSunset from './SunriseSunset'
 
 const Container = styled.div`
   display: flex;
@@ -35,11 +30,6 @@ const WeatherDetails = styled.p`
   color: rgba(255, 255, 255, 0.9);
 `
 
-const SunriseSunset = styled.div`
-  display: flex;
-  justify-content: center;
-`
-
 const Icon = styled(FontAwesomeIcon)`
   margin-right: 0.5rem;
 `
@@ -62,16 +52,7 @@ const Weather = props => {
           </WeatherDetails>
         </HumidityPressure>
       </Container>
-      <SunriseSunset>
-        <WeatherDetails>
-          <Icon icon={faSun} style={{ color: 'rgba(254,95,0, 0.8)' }} />
-          Sunrise: {dayjs.unix(sun.sunrise).format('HH:mm')}
-        </WeatherDetails>
-        <WeatherDetails>
-          <Icon icon={faMoon} />
-          Sunset: {dayjs.unix(sun.sunset).format('HH:mm')}
-        </WeatherDetails>
-      </SunriseSunset>
+      <SunriseSunset sunrise={sun.sunrise} sunset={sun.sunset} />
     </div>
   )
 }

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import WeatherContainer from './containers/WeatherContainer'
-import { Container } from '@material-ui/core';
-import SearchBar from './components/SearchBar';
+import { Container } from '@material-ui/core'
+import SearchBar from './components/SearchBar'
 
 function App() {
   const [city, setCity] = useState('Szczecin')
@@ -14,14 +14,9 @@ function App() {
   }
   return (
     <>
-      <SearchBar
-        value={city}
-        onKeyDown={e => onEnterClick(e)}
-      />
+      <SearchBar value={city} onKeyDown={e => onEnterClick(e)} />
       <Container maxWidth="sm">
-        <WeatherContainer
-          city={city}
-        />
+        <WeatherContainer city={city} />
       </Container>
     </>
   )
