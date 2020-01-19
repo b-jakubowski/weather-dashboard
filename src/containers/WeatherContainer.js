@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
 import City from '../components/City'
 import Weather from '../components/Weather'
-import Search from '../components/Search'
 import Forecast from '../components/Forecast'
 import useWeather from '../hooks/useWeather'
 
@@ -14,6 +13,7 @@ const Container = styled.div`
   );
   border-radius: 1rem;
   padding: 2rem;
+  margin-top: 6rem;
 `
 
 const InfoText = styled.h4`
@@ -21,16 +21,8 @@ const InfoText = styled.h4`
   text-align: center;
 `
 
-const WeatherContainer = () => {
-  const [city, setCity] = useState('Szczecin')
+const WeatherContainer = ({ city }) => {
   const { weather, forecast, isLoading, isError } = useWeather(city)
-
-  function onEnterClick(e) {
-    if (e.key === 'Enter') {
-      e.preventDefault()
-      setCity(e.target.value)
-    }
-  }
 
   const WeatherAndForecast = () => {
     return (
@@ -55,11 +47,6 @@ const WeatherContainer = () => {
 
   return (
     <>
-      <Search
-        value={city}
-        onClick={inputValue => setCity(inputValue)}
-        onKeyDown={e => onEnterClick(e)}
-      />
       <Container>
         {isLoading ? <InfoText>Loading....</InfoText> : <WeatherAndForecast />}
       </Container>
