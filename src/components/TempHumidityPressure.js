@@ -12,6 +12,9 @@ const useStyles = makeStyles({
   card: {
     minWidth: 300
   },
+  content: {
+    height: 150
+  },
   icon: {
     display: 'flex',
     justifyContent: 'center',
@@ -23,7 +26,7 @@ const useStyles = makeStyles({
     alignItems: 'center'
   },
   temp: {
-    marginBottom: 4
+    marginBottom: 8
   },
   secondaryText: {
     fontSize: '1.3rem'
@@ -34,7 +37,7 @@ const TempHumidityPressure = ({ temp, humidity, pressure }) => {
   const classes = useStyles()
   return (
     <Card className={classes.card}>
-      <CardContent>
+      <CardContent className={classes.content}>
         <Typography
           className={`${classes.temp} ${classes.info}`}
           variant="h3"

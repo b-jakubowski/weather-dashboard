@@ -1,20 +1,20 @@
-import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
+import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
 import dayjs from 'dayjs'
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { makeStyles } from '@material-ui/core/styles';
-import { Card, CardContent, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles'
+import { Card, CardContent, Typography } from '@material-ui/core'
 
 const useStyles = makeStyles({
   card: {
-    minWidth: 300,
+    minWidth: 280,
     paddingBottom: 0
   },
   content: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    height: 180
+    height: 150
   },
   icon: {
     display: 'flex',

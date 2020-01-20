@@ -1,10 +1,13 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import { Card, CardContent, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles'
+import { Card, CardContent, Typography } from '@material-ui/core'
 
 const useStyles = makeStyles({
   card: {
     minWidth: 300
+  },
+  content: {
+    height: 150
   },
   icon: {
     display: 'flex',
@@ -16,8 +19,8 @@ const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'center'
   },
-  temp: {
-    marginBottom: 4
+  city: {
+    marginBottom: 8
   },
   secondaryText: {
     fontSize: '1.3rem'
@@ -30,9 +33,9 @@ const City = ({ name, coord }) => {
 
   return (
     <Card className={classes.card}>
-      <CardContent>
+      <CardContent className={classes.content}>
         <Typography
-          className={`${classes.temp} ${classes.info}`}
+          className={`${classes.city} ${classes.info}`}
           variant="h3"
           component="h3"
         >

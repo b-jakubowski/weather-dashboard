@@ -15,7 +15,7 @@ function App() {
   return (
     <>
       <SearchBar value={city} onKeyDown={e => onEnterClick(e)} />
-      <Container maxWidth="sm">
+      <Container maxWidth="lg">
         <WeatherContainer city={city} />
       </Container>
     </>
