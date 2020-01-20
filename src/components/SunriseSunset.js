@@ -1,36 +1,72 @@
-import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
+import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 import dayjs from 'dayjs'
 import React from 'react'
-import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { makeStyles } from '@material-ui/core/styles';
+import { Card, CardContent, Typography } from '@material-ui/core';
 
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-`
-
-const WeatherDetails = styled.p`
-  margin: 0 0.5rem 0 0;
-  padding: 0.2rem;
-  color: rgba(255, 255, 255, 0.9);
-`
-
-const Icon = styled(FontAwesomeIcon)`
-  margin-right: 0.5rem;
-`
+const useStyles = makeStyles({
+  card: {
+    minWidth: 300,
+    paddingBottom: 0
+  },
+  content: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    height: 180
+  },
+  icon: {
+    display: 'flex',
+    justifyContent: 'center',
+    width: 35,
+    marginRight: 4
+  },
+  text: {
+    fontSize: '1.3rem',
+    flex: 1,
+    color: 'white',
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  sunrise: {
+    backgroundColor: '#FF8100'
+  },
+  sunset: {
+    backgroundColor: '#6A0D83'
+  }
+})
 
 const SunriseSunset = ({ sunrise, sunset }) => {
+  const classes = useStyles()
+
   return (
-    <Container>
-      <WeatherDetails>
-        <Icon icon={faSun} style={{ color: 'rgba(254,95,0, 0.8)' }} />
-        Sunrise: {dayjs.unix(sunrise).format('HH:mm')}
-      </WeatherDetails>
-      <WeatherDetails>
-        <Icon icon={faMoon} />
-        Sunset: {dayjs.unix(sunset).format('HH:mm')}
-      </WeatherDetails>
-    </Container>
+    <Card className={classes.card}>
+      <CardContent className={classes.content}>
+        <Typography
+          className={`${classes.info} ${classes.text} ${classes.sunrise}`}
+          variant="h3"
+          component="h3"
+        >
+          <div className={classes.icon}>
+            <FontAwesomeIcon icon={faSun} />
+          </div>
+          Sunrise: {dayjs.unix(sunrise).format('HH:mm')}
+        </Typography>
+        <Typography
+          className={`${classes.info} ${classes.text} ${classes.sunset}`}
+          variant="h3"
+          component="h3"
+        >
+          <div className={classes.icon}>
+            <FontAwesomeIcon icon={faMoon} />
+          </div>
+          Sunset: {dayjs.unix(sunset).format('HH:mm')}
+        </Typography>
+      </CardContent>
+    </Card>
   )
 }
 
