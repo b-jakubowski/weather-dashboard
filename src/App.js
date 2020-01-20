@@ -1,25 +1,24 @@
-import React from 'react'
-import styled from '@emotion/styled'
+import React, { useState } from 'react'
 import WeatherContainer from './containers/WeatherContainer'
-
-export const Container = styled.div`
-  display: flex;
-  min-height: calc(100vh - 4rem);
-  justify-content: center;
-  padding: 1rem 2rem;
-`
-
-export const Content = styled.div`
-  width: 34rem;
-`
+import { Container } from '@material-ui/core'
+import SearchBar from './components/SearchBar'
 
 function App() {
+  const [city, setCity] = useState('Szczecin')
+
+  function onEnterClick(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      setCity(e.target.value)
+    }
+  }
   return (
-    <Container>
-      <Content>
-        <WeatherContainer />
-      </Content>
-    </Container>
+    <>
+      <SearchBar value={city} onKeyDown={e => onEnterClick(e)} />
+      <Container maxWidth="lg">
+        <WeatherContainer city={city} />
+      </Container>
+    </>
   )
 }
 
