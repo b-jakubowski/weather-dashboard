@@ -1,51 +1,59 @@
 import React from 'react'
-import styled from '@emotion/styled'
+import { makeStyles } from '@material-ui/core/styles';
+import { Card, CardContent, Typography } from '@material-ui/core';
 
-const Container = styled.div`
-  margin-top: 0.5rem;
-`
+const useStyles = makeStyles({
+  card: {
+    minWidth: 300
+  },
+  icon: {
+    display: 'flex',
+    justifyContent: 'center',
+    width: 35,
+    marginRight: 4
+  },
+  info: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  temp: {
+    marginBottom: 4
+  },
+  secondaryText: {
+    fontSize: '1.3rem'
+  }
+})
 
-const CityContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0.5rem 0;
-`
-
-const CityName = styled.h3`
-  font-size: 2.5rem;
-  margin: 0;
-  color: rgba(255, 255, 255, 0.75);
-`
-
-const Coordinates = styled.div`
-  display: flex;
-  margin: 0.3rem 0 0 0.6rem;
-`
-
-const Coord = styled.p`
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 0.8rem;
-  margin: 0 0.5rem 0.3rem 0;
-`
-
-const City = props => {
-  const { name, coord } = props
+const City = ({ name, coord }) => {
+  const classes = useStyles()
   const todayDate = new Date().toDateString()
 
   return (
-    <Container>
-      <CityContent>
-        <CityName>{name}</CityName>
-        {coord && (
-          <Coordinates>
-            <Coord>lng: {coord.lon}</Coord>
-            <Coord>lat: {coord.lat}</Coord>
-            <Coord>{todayDate}</Coord>
-          </Coordinates>
-        )}
-      </CityContent>
-    </Container>
+    <Card className={classes.card}>
+      <CardContent>
+        <Typography
+          className={`${classes.temp} ${classes.info}`}
+          variant="h3"
+          component="h3"
+        >
+          {name}
+        </Typography>
+        <Typography
+          className={`${classes.info} ${classes.secondaryText}`}
+          variant="h5"
+          component="h5"
+        >
+          lng: {coord.lon} lat: {coord.lat}
+        </Typography>
+        <Typography
+          className={`${classes.info} ${classes.secondaryText}`}
+          variant="h5"
+          component="h5"
+        >
+          {todayDate}
+        </Typography>
+      </CardContent>
+    </Card>
   )
 }
 

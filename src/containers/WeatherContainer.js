@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import City from '../components/City'
 import Weather from '../components/Weather'
 import Forecast from '../components/Forecast'
 import useWeather from '../hooks/useWeather'
@@ -29,8 +28,9 @@ const WeatherContainer = ({ city }) => {
       <>
         {!isError && forecast.temp && weather.main ? (
           <>
-            <City name={weather.name} coord={weather.coord} />
             <Weather
+              city={weather.name}
+              coord={weather.coord}
               temp={weather.main.temp}
               humidity={weather.main.humidity}
               pressure={weather.main.pressure}
