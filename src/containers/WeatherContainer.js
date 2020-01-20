@@ -3,13 +3,12 @@ import styled from '@emotion/styled'
 import Weather from '../components/Weather'
 import Forecast from '../components/Forecast'
 import useWeather from '../hooks/useWeather'
+import Grid from '@material-ui/core/Grid'
+import { Card, CardContent } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 
 const Container = styled.div`
-  background-image: radial-gradient(
-    circle farthest-corner at 84.6% 77.8%,
-    rgba(86, 89, 218, 1) 0%,
-    rgba(95, 208, 248, 1) 90%
-  );
+  background-color: #e5e5e5;
   border-radius: 1rem;
   padding: 2rem;
   margin-top: 6rem;
@@ -20,14 +19,21 @@ const InfoText = styled.h4`
   text-align: center;
 `
 
+const useStyles = makeStyles({
+  card: {
+    height: 404
+  }
+})
+
 const WeatherContainer = ({ city }) => {
   const { weather, forecast, isLoading, isError } = useWeather(city)
+  const classes = useStyles()
 
   const WeatherAndForecast = () => {
     return (
       <>
         {!isError && forecast.temp && weather.main ? (
-          <>
+          <Grid container spacing={3}>
             <Weather
               city={weather.name}
               coord={weather.coord}
@@ -36,8 +42,15 @@ const WeatherContainer = ({ city }) => {
               pressure={weather.main.pressure}
               sun={weather.sys}
             />
-            <Forecast forecast={forecast} />
-          </>
+            <Grid item xs={12} md={8}>
+              <Forecast forecast={forecast} />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Card className={classes.card}>
+                <CardContent>mapa</CardContent>
+              </Card>
+            </Grid>
+          </Grid>
         ) : (
           <InfoText>Cant find results for '{city}'</InfoText>
         )}
