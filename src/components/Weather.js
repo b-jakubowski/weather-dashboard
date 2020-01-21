@@ -3,6 +3,7 @@ import SunriseSunset from './SunriseSunset'
 import TempHumidityPressure from './TempHumidityPressure'
 import City from './City'
 import Grid from '@material-ui/core/Grid'
+import PropTypes from 'prop-types'
 
 const Weather = ({ city, coord, temp, humidity, pressure, sun }) => {
   return (
@@ -22,6 +23,21 @@ const Weather = ({ city, coord, temp, humidity, pressure, sun }) => {
       </Grid>
     </>
   )
+}
+
+Weather.propTypes = {
+  city: PropTypes.string.isRequired,
+  coord: PropTypes.shape({
+    lat: PropTypes.number.isRequired,
+    lon: PropTypes.number.isRequired
+  }),
+  temp: PropTypes.number.isRequired,
+  humidity: PropTypes.number.isRequired,
+  pressure: PropTypes.number.isRequired,
+  sun: PropTypes.shape({
+    sunrise: PropTypes.number.isRequired,
+    sunset: PropTypes.number.isRequired
+  }).isRequired
 }
 
 export default Weather

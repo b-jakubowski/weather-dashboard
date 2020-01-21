@@ -7,6 +7,7 @@ import {
   faThermometerHalf,
   faTint
 } from '@fortawesome/free-solid-svg-icons'
+import PropTypes from 'prop-types'
 
 const useStyles = makeStyles({
   card: {
@@ -71,6 +72,12 @@ const TempHumidityPressure = ({ temp, humidity, pressure }) => {
       </CardContent>
     </Card>
   )
+}
+
+TempHumidityPressure.propTypes = {
+  temp: PropTypes.number.isRequired,
+  humidity: PropTypes.number.isRequired,
+  pressure: PropTypes.number.isRequired
 }
 
 export default TempHumidityPressure
