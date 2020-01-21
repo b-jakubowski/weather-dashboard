@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import Chart from 'chart.js'
 import { makeStyles } from '@material-ui/core/styles'
 import { Card, CardContent, Typography } from '@material-ui/core'
+import PropTypes from 'prop-types'
 
 const useStyles = makeStyles({
   container: {
@@ -85,6 +86,10 @@ const Forecast = ({ forecast }) => {
       </CardContent>
     </Card>
   )
+}
+
+Forecast.propTypes = {
+  forecast: PropTypes.object
 }
 
 export default Forecast

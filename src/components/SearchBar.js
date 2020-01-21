@@ -3,6 +3,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import SearchIcon from '@material-ui/icons/Search'
 import { fade, InputBase, makeStyles } from '@material-ui/core'
 import AppBar from '@material-ui/core/AppBar'
+import PropTypes from 'prop-types'
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -72,6 +73,11 @@ const SearchBar = ({ onKeyDown, value }) => {
       </Toolbar>
     </AppBar>
   )
+}
+
+SearchBar.propTypes = {
+  onKeyDown: PropTypes.func,
+  value: PropTypes.string
 }
 
 export default SearchBar

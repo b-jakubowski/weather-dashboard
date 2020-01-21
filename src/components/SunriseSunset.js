@@ -4,6 +4,7 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { makeStyles } from '@material-ui/core/styles'
 import { Card, CardContent, Typography } from '@material-ui/core'
+import PropTypes from 'prop-types'
 
 const useStyles = makeStyles({
   card: {
@@ -68,6 +69,11 @@ const SunriseSunset = ({ sunrise, sunset }) => {
       </CardContent>
     </Card>
   )
+}
+
+SunriseSunset.propTypes = {
+  sunrise: PropTypes.number.isRequired,
+  sunset: PropTypes.number.isRequired
 }
 
 export default SunriseSunset

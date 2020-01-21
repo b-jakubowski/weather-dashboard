@@ -4,7 +4,7 @@ import Forecast from '../components/Forecast'
 import useWeather from '../hooks/useWeather'
 import Grid from '@material-ui/core/Grid'
 import Map from '../components/Map'
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles({
   container: {
@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   infoText: {
     color: 'white',
     textAlign: 'center'
-  },
+  }
 })
 
 const WeatherContainer = ({ city }) => {
@@ -53,7 +53,11 @@ const WeatherContainer = ({ city }) => {
   return (
     <>
       <div className={classes.container}>
-        {isLoading ? <h4 className={classes.infoText}>Loading....</h4> : <WeatherAndForecast />}
+        {isLoading ? (
+          <h4 className={classes.infoText}>Loading....</h4>
+        ) : (
+          <WeatherAndForecast />
+        )}
       </div>
     </>
   )

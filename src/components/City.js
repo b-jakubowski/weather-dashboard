@@ -1,6 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Card, CardContent, Typography } from '@material-ui/core'
+import PropTypes from 'prop-types'
 
 const useStyles = makeStyles({
   card: {
@@ -58,6 +59,14 @@ const City = ({ name, coord }) => {
       </CardContent>
     </Card>
   )
+}
+
+City.propTypes = {
+  name: PropTypes.string.isRequired,
+  coord: PropTypes.shape({
+    lat: PropTypes.number.isRequired,
+    lon: PropTypes.number.isRequired
+  }).isRequired
 }
 
 export default City

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import L from 'leaflet'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
+import PropTypes from 'prop-types'
 
 const Map = ({ lat, lon }) => {
   useEffect(() => {
@@ -28,6 +29,11 @@ const Map = ({ lat, lon }) => {
       </CardContent>
     </Card>
   )
+}
+
+Map.propTypes = {
+  lat: PropTypes.number.isRequired,
+  lon: PropTypes.number.isRequired
 }
 
 export default Map
