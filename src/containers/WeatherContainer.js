@@ -4,7 +4,6 @@ import Weather from '../components/Weather'
 import Forecast from '../components/Forecast'
 import useWeather from '../hooks/useWeather'
 import Grid from '@material-ui/core/Grid'
-import { makeStyles } from '@material-ui/core/styles'
 import Map from '../components/Map'
 
 const Container = styled.div`
@@ -19,15 +18,8 @@ const InfoText = styled.h4`
   text-align: center;
 `
 
-const useStyles = makeStyles({
-  card: {
-    position: 'relative'
-  }
-})
-
 const WeatherContainer = ({ city }) => {
   const { weather, forecast, isLoading, isError } = useWeather(city)
-  const classes = useStyles()
 
   const WeatherAndForecast = () => {
     return (
