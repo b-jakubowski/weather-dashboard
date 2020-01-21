@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import Chart from 'chart.js'
 import { makeStyles } from '@material-ui/core/styles'
-import { Card, CardContent } from '@material-ui/core'
-import Typography from '@material-ui/core/Typography';
+import { Card, CardContent, Typography } from '@material-ui/core'
 
 const useStyles = makeStyles({
   container: {
