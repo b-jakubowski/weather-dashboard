@@ -11,6 +11,7 @@
     "@material-ui/icons": "^4.5.1",
     "dayjs": "^1.8.17",
     "leaflet": "^1.6.0",
+    "prop-types": "^15.7.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-scripts": "3.2.0"
@@ -38,8 +39,6 @@
     ]
   },
   "devDependencies": {
-    "@emotion/core": "^10.0.22",
-    "@emotion/styled": "^10.0.23",
     "chart.js": "^2.9.3",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.5.0",

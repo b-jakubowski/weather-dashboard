@@ -1,25 +1,27 @@
 import React from 'react'
-import styled from '@emotion/styled'
 import Weather from '../components/Weather'
 import Forecast from '../components/Forecast'
 import useWeather from '../hooks/useWeather'
 import Grid from '@material-ui/core/Grid'
 import Map from '../components/Map'
+import { makeStyles } from '@material-ui/core/styles';
 
-const Container = styled.div`
-  background-color: #e5e5e5;
-  border-radius: 1rem;
-  padding: 2rem;
-  margin-top: 6rem;
-`
-
-const InfoText = styled.h4`
-  color: white;
-  text-align: center;
-`
+const useStyles = makeStyles({
+  container: {
+    backgroundColor: '#e5e5e5',
+    borderRadius: '1rem',
+    padding: '2rem',
+    marginTop: '6rem'
+  },
+  infoText: {
+    color: 'white',
+    textAlign: 'center'
+  },
+})
 
 const WeatherContainer = ({ city }) => {
   const { weather, forecast, isLoading, isError } = useWeather(city)
+  const classes = useStyles()
 
   const WeatherAndForecast = () => {
     return (
@@ -42,7 +44,7 @@ const WeatherContainer = ({ city }) => {
             </Grid>
           </Grid>
         ) : (
-          <InfoText>Cant find results for '{city}'</InfoText>
+          <h4 className={classes.infoText}>Cant find results for '{city}'</h4>
         )}
       </>
     )
@@ -50,9 +52,9 @@ const WeatherContainer = ({ city }) => {
 
   return (
     <>
-      <Container>
-        {isLoading ? <InfoText>Loading....</InfoText> : <WeatherAndForecast />}
-      </Container>
+      <div className={classes.container}>
+        {isLoading ? <h4 className={classes.infoText}>Loading....</h4> : <WeatherAndForecast />}
+      </div>
     </>
   )
 }
