@@ -4,8 +4,8 @@ import Weather from '../components/Weather'
 import Forecast from '../components/Forecast'
 import useWeather from '../hooks/useWeather'
 import Grid from '@material-ui/core/Grid'
-import { Card, CardContent } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import Map from '../components/Map'
 
 const Container = styled.div`
   background-color: #e5e5e5;
@@ -21,7 +21,7 @@ const InfoText = styled.h4`
 
 const useStyles = makeStyles({
   card: {
-    height: 404
+    position: 'relative'
   }
 })
 
@@ -46,9 +46,7 @@ const WeatherContainer = ({ city }) => {
               <Forecast forecast={forecast} />
             </Grid>
             <Grid item xs={12} md={4}>
-              <Card className={classes.card}>
-                <CardContent>mapa</CardContent>
-              </Card>
+              <Map lat={weather.coord.lat} lon={weather.coord.lon} />
             </Grid>
           </Grid>
         ) : (
