@@ -2,11 +2,18 @@ import React, { useEffect } from 'react'
 import Chart from 'chart.js'
 import { makeStyles } from '@material-ui/core/styles'
 import { Card, CardContent } from '@material-ui/core'
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
   container: {
-    maxHeight: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    height: 400,
     padding: 16
+  },
+  title: {
+    marginBottom: 16
   },
   canvas: {
     maxWidth: '100%'
@@ -72,6 +79,9 @@ const Forecast = ({ forecast }) => {
   return (
     <Card>
       <CardContent className={classes.container}>
+        <Typography className={classes.title} variant="h5" component="h2">
+          Forecast
+        </Typography>
         <canvas className={classes.canvas} ref={node => (chartCanvas = node)} />
       </CardContent>
     </Card>
