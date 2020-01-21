@@ -1,6 +1,12 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 import { Card, CardContent, Typography } from '@material-ui/core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { makeStyles } from '@material-ui/core/styles'
+import {
+  faArrowDown,
+  faThermometerHalf,
+  faTint
+} from '@fortawesome/free-solid-svg-icons'
 
 const useStyles = makeStyles({
   card: {
@@ -19,7 +25,7 @@ const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'center'
   },
-  city: {
+  temp: {
     marginBottom: 8
   },
   secondaryText: {
@@ -27,37 +33,44 @@ const useStyles = makeStyles({
   }
 })
 
-const City = ({ name, coord }) => {
+const TempHumidityPressure = ({ temp, humidity, pressure }) => {
   const classes = useStyles()
-  const todayDate = new Date().toDateString()
-
   return (
     <Card className={classes.card}>
       <CardContent className={classes.content}>
         <Typography
-          className={`${classes.city} ${classes.info}`}
+          className={`${classes.temp} ${classes.info}`}
           variant="h3"
           component="h3"
         >
-          {name}
+          <div className={classes.icon}>
+            <FontAwesomeIcon icon={faThermometerHalf} />
+          </div>
+          {temp} °C
         </Typography>
         <Typography
           className={`${classes.info} ${classes.secondaryText}`}
           variant="h5"
           component="h5"
         >
-          lng: {coord.lon} lat: {coord.lat}
+          <div className={classes.icon}>
+            <FontAwesomeIcon icon={faTint} />
+          </div>
+          Humidity: {humidity} %
         </Typography>
         <Typography
           className={`${classes.info} ${classes.secondaryText}`}
           variant="h5"
           component="h5"
         >
-          {todayDate}
+          <div className={classes.icon}>
+            <FontAwesomeIcon icon={faArrowDown} />
+          </div>
+          Pressure: {pressure} hPa
         </Typography>
       </CardContent>
     </Card>
   )
 }
 
-export default City
+export default TempHumidityPressure

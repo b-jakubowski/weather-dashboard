@@ -1,7 +1,26 @@
 import React, { useEffect } from 'react'
 import Chart from 'chart.js'
+import { makeStyles } from '@material-ui/core/styles'
+import { Card, CardContent, Typography } from '@material-ui/core'
+
+const useStyles = makeStyles({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    height: 400,
+    padding: 16
+  },
+  title: {
+    marginBottom: 16
+  },
+  canvas: {
+    maxWidth: '100%'
+  }
+})
 
 const Forecast = ({ forecast }) => {
+  const classes = useStyles()
   let chartCanvas
 
   useEffect(() => {
@@ -18,8 +37,7 @@ const Forecast = ({ forecast }) => {
               {
                 display: true,
                 ticks: {
-                  suggestedMin: 0,
-                  fontColor: 'white'
+                  suggestedMin: 0
                 },
                 gridLines: {
                   display: false
@@ -29,9 +47,6 @@ const Forecast = ({ forecast }) => {
             xAxes: [
               {
                 stacked: true,
-                ticks: {
-                  fontColor: 'white'
-                },
                 gridLines: {
                   display: false
                 }
@@ -45,12 +60,12 @@ const Forecast = ({ forecast }) => {
             {
               label: '',
               data: Object.values(forecast.minTemp),
-              backgroundColor: 'blue'
+              backgroundColor: '#4c9bc4'
             },
             {
               label: '',
               data: Object.values(forecast.temp),
-              backgroundColor: 'rgba(255,255,255, 0.9)'
+              backgroundColor: '#fac76c'
             }
           ]
         }
@@ -61,20 +76,15 @@ const Forecast = ({ forecast }) => {
   }, [chartCanvas, forecast])
 
   return (
-    <div style={styles.container}>
-      <canvas style={styles.canvas} ref={node => (chartCanvas = node)} />
-    </div>
+    <Card>
+      <CardContent className={classes.container}>
+        <Typography className={classes.title} variant="h5" component="h2">
+          Forecast
+        </Typography>
+        <canvas className={classes.canvas} ref={node => (chartCanvas = node)} />
+      </CardContent>
+    </Card>
   )
-}
-
-const styles = {
-  container: {
-    marginTop: '3rem',
-    maxHeight: '100%'
-  },
-  canvas: {
-    maxWidth: '100%'
-  }
 }
 
 export default Forecast
