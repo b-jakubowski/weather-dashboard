@@ -4,13 +4,14 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Card, CardContent, Typography } from '@material-ui/core'
 import PropTypes from 'prop-types'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   container: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    height: 400,
-    padding: 16
+    [theme.breakpoints.up('md')]: {
+      height: 400
+    }
   },
   title: {
     marginBottom: 16
@@ -18,7 +19,7 @@ const useStyles = makeStyles({
   canvas: {
     maxWidth: '100%'
   }
-})
+}))
 
 const Forecast = ({ forecast }) => {
   const classes = useStyles()

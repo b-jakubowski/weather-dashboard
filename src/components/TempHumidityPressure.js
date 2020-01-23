@@ -9,12 +9,12 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import PropTypes from 'prop-types'
 
-const useStyles = makeStyles({
-  card: {
-    minWidth: 300
-  },
+const useStyles = makeStyles(theme => ({
   content: {
-    height: 150
+    height: 150,
+    [theme.breakpoints.down('sm')]: {
+      height: 100
+    }
   },
   icon: {
     display: 'flex',
@@ -27,17 +27,23 @@ const useStyles = makeStyles({
     alignItems: 'center'
   },
   temp: {
-    marginBottom: 8
+    marginBottom: 8,
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '2rem'
+    }
   },
   secondaryText: {
-    fontSize: '1.3rem'
+    fontSize: '1.3rem',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1.1rem'
+    }
   }
-})
+}))
 
 const TempHumidityPressure = ({ temp, humidity, pressure }) => {
   const classes = useStyles()
   return (
-    <Card className={classes.card}>
+    <Card>
       <CardContent className={classes.content}>
         <Typography
           className={`${classes.temp} ${classes.info}`}

@@ -7,10 +7,6 @@ import { Card, CardContent, Typography } from '@material-ui/core'
 import PropTypes from 'prop-types'
 
 const useStyles = makeStyles({
-  card: {
-    minWidth: 280,
-    paddingBottom: 0
-  },
   content: {
     display: 'flex',
     flexDirection: 'column',
@@ -44,7 +40,7 @@ const SunriseSunset = ({ sunrise, sunset }) => {
   const classes = useStyles()
 
   return (
-    <Card className={classes.card}>
+    <Card>
       <CardContent className={classes.content}>
         <Typography
           className={`${classes.info} ${classes.text} ${classes.sunrise}`}

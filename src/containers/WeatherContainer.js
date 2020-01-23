@@ -6,18 +6,21 @@ import Grid from '@material-ui/core/Grid'
 import Map from '../components/Map'
 import { makeStyles } from '@material-ui/core/styles'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   container: {
     backgroundColor: '#e5e5e5',
     borderRadius: '1rem',
     padding: '2rem',
-    marginTop: '6rem'
+    marginTop: '6rem',
+    [theme.breakpoints.down('xs')]: {
+      marginTop: '4rem'
+    }
   },
   infoText: {
     color: 'white',
     textAlign: 'center'
   }
-})
+}))
 
 const WeatherContainer = ({ city }) => {
   const { weather, forecast, isLoading, isError } = useWeather(city)
@@ -27,7 +30,7 @@ const WeatherContainer = ({ city }) => {
     return (
       <>
         {!isError && forecast.temp && weather.main ? (
-          <Grid container spacing={3}>
+          <Grid container spacing={2}>
             <Weather
               city={weather.name}
               coord={weather.coord}

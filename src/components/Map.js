@@ -1,10 +1,24 @@
 import React, { useEffect } from 'react'
 import L from 'leaflet'
-import Card from '@material-ui/core/Card'
-import CardContent from '@material-ui/core/CardContent'
+import { Card, CardContent, makeStyles } from '@material-ui/core'
 import PropTypes from 'prop-types'
 
+const useStyles = makeStyles(theme => ({
+  container: {
+    height: 400,
+    [theme.breakpoints.down('sm')]: {
+      height: 160
+    }
+  },
+  map: {
+    width: '100%',
+    height: '100%'
+  }
+  }))
+
 const Map = ({ lat, lon }) => {
+  const classes = useStyles()
+
   useEffect(() => {
     L.map('map', {
       center: [lat, lon],
@@ -19,13 +33,15 @@ const Map = ({ lat, lon }) => {
         ),
         L.marker([lat, lon])
       ]
-    }).invalidateSize(true)
+    })
+      .invalidateSize(true)
+      .dragging.disable()
   }, [lat, lon])
 
   return (
     <Card>
-      <CardContent style={{ width: 'auto', height: 400 }}>
-        <div style={{ width: '100%', height: '100%' }} id="map"></div>
+      <CardContent className={classes.container}>
+        <div style={classes.map} id="map"></div>
       </CardContent>
     </Card>
   )
