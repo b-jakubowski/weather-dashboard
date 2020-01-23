@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     height: '100%'
   }
-  }))
+}))
 
 const Map = ({ lat, lon }) => {
   const classes = useStyles()
@@ -41,7 +41,7 @@ const Map = ({ lat, lon }) => {
   return (
     <Card>
       <CardContent className={classes.container}>
-        <div style={classes.map} id="map"></div>
+        <div className={classes.map} id="map"></div>
       </CardContent>
     </Card>
   )
